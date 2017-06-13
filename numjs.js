@@ -24,6 +24,24 @@ exports.nums = function(num, shape){
 };
 
 /**
+ * [ones description]
+ * @param  {[type]} shape [description]
+ * @return {[type]}       [description]
+ */
+exports.ones = function(shape){
+    return exports.nums(1, shape);
+};
+
+/**
+ * [zeros description]
+ * @param  {[type]} shape [description]
+ * @return {[type]}       [description]
+ */
+exports.zeros = function(shape){
+    return exports.nums(0, shape);
+};
+
+/**
  * [number description]
  * @param  {[type]} num [description]
  * @return {[type]}     [description]
@@ -68,15 +86,7 @@ exports.istype = function(obj, cname){
  * @return {[type]}       [description]
  */
 exports.random = function(shape){
-    var shape = shape || [1, 1];
-    if (exports.istype(shape,'number')) {
-        shape = [shape, shape];
-    }
-    var array = new Array(shape[0]*shape[1]);
-    for (var i = 0; i < array.length; i++) {
-        array[i] = Math.random();
-    }
-    return new exports.matrix(array, shape);
+    return exports.nums(Math.random, shape);
 };
 
 exports.nextpow = function(n, pow){
@@ -184,7 +194,7 @@ exports.matrix = function(array, shape){
     this.cross = function(mat){
         if (this.shape[1]==mat.shape[0]) {
             var mat = mat.transpose();
-            var shape = [this.shape[0], mat.shape[1]];
+            var shape = [this.shape[0], mat.shape[0]];
             var array = new Array(shape[0]*shape[1]);
             for (var i = 0; i < shape[0]; i++) {
                 for (var j = 0; j < shape[1]; j++) {
